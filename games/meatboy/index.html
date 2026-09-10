@@ -1,22 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <meta charset="UTF-8">
-  <head>
-    <title>Ruffle Dynamic Player</title>
-    <style>
-      * {
-        margin: 0;
-      }
-      :root, body, object {
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-      }
-    </style>
-    <script src="configure-ruffle.js"> </script>
-    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
-    <script src="run-ruffle.js"> </script>
-  </head>
-  <body>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <title>My Flash Game on GitHub Pages</title>
+</head>
+<body>
+
+    <!-- 1. The container where the Flash player will load -->
+    <div id="flash-container"></div>
+
+    <!-- 2. Load the main Ruffle script -->
+    <script src="ruffle/ruffle.js"></script>
+
+    <!-- 3. Initialize and play the SWF file -->
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            // Access the Ruffle object initialized by ruffle.js
+            const ruffle = window.RufflePlayer.newest();
+            
+            // Create a player instance
+            const player = ruffle.createPlayer();
+            
+            // Find your container element and attach the player to it
+            const container = document.getElementById("flash-container");
+            container.appendChild(player);
+            
+            // Load your specific SWF file with custom configuration
+            player.load({
+                url: "games/meatboy/meatboy.swf",
+                allowScriptAccess: true
+            });
+
+            // Optional: style the player dimensions
+            player.style.width = "800px";
+            player.style.height = "600px";
+        });
+    </script>
+
+</body>
 </html>
